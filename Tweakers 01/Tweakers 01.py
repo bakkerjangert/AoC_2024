@@ -167,7 +167,7 @@ for i, c in enumerate(connections):
             # s = [con for con in current_sign]
             # print(s)
             signs.add(tuple(sorted(current_sign))) # Sort to make sure set does not find similar signs with different order
-        if len(stars) < stars_max:
+        if len(stars) <= stars_max:
             neighbors = []
             for c_3 in current_sign:
                 for neighbor in connections[c_3].connections:
