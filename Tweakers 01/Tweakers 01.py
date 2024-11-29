@@ -1,5 +1,6 @@
 import numpy as np
 from copy import deepcopy
+import random
 
 file = 'input.txt'
 # file = 'example 02.txt'
@@ -67,25 +68,20 @@ class Connection:
         return f'Connection from Star {self.s1} to {self.s2}, a {"horizontal" if self.horizontal else "vertical"} connection'
 
 
-def sorted_connections(lst):
-    return
-
-
 def show_grid(grid):
     for line in grid:
         for char in line:
-            print(char, end='')
+            if char == '*':
+                print(f'\033[33m{char}\033[0m', end='')
+            elif char in '-|+':
+                print(f'\033[31m{char}\033[0m', end='')
+            else:
+                print(f'{char}', end='')
         print('')
     print('\n------\n')
 
 with open(file, 'r') as f:
     data = f.read().splitlines()
-
-st = 0
-for line in data:
-    st += line.count('*')
-print(st)
-
 
 stars, n = [], 0
 grid = np.empty((len(data), len(data[0])), dtype=str)
@@ -132,22 +128,6 @@ for i, c1 in enumerate(connections[:-1]):
 
 for star in stars:
     grid[star.y, star.x] = '*'
-show_grid(grid)
-
-for c in connections:
-    subgrid = grid.copy()
-    for n in c.intersects:
-        if n.horizontal:
-            subgrid[n.s1.y, n.s1.x + 1: n.s2.x] = '-'
-        else:
-            subgrid[n.s1.y + 1: n.s2.y, n.s1.x] = '|'
-    if c.horizontal:
-        subgrid[c.s1.y, c.s1.x + 1: c.s2.x] = '#'
-    else:
-        subgrid[c.s1.y + 1: c.s2.y, c.s1.x] = '#'
-    show_grid(subgrid)
-print(len(stars))
-print(len(connections))
 
 stars_min, stars_max = 3, 10
 signs = set()
@@ -182,3 +162,17 @@ for i, c in enumerate(connections):
                 current_signs.add(tuple(sorted(current_sign + (neighbor_,))))
 
 print(len(signs))
+
+signs_to_be_printed = 10
+tup_signs = tuple(signs)
+
+for _ in range(signs_to_be_printed):
+    subgrid = grid.copy()
+    sign = random.choice(tup_signs)
+    for c in sign:
+        con = connections[c]
+        if con.horizontal:
+            subgrid[con.s1.y, con.s1.x + 1: con.s2.x] = '-'
+        elif con.vertical:
+            subgrid[con.s1.y + 1: con.s2.y, con.s1.x] = '|'
+    show_grid(subgrid)
