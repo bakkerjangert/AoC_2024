@@ -44,6 +44,7 @@ def walk(grid, guard, pos, d, pt1=False):
 
 file = 'input.txt'
 # file = 'example_01.txt'
+file = 'aoc-2024-day-06-challenge-3.txt'
 
 with open(file, encoding="utf8") as f:
     data = f.read().splitlines()
