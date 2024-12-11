@@ -1,10 +1,10 @@
 file = 'input.txt'
-# file = 'example_01.txt'
+# file = 'aoc-2024-day-10-challenge-1.txt'
 
 with open(file, encoding="utf8") as f:
     data = f.read().splitlines()
 
-x_max, y_max = len(data), len(data[0])
+x_max, y_max = len(data[0]), len(data)
 positions = []
 for y in range(len(data)):
     for x in range(len(data[0])):
