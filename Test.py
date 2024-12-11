@@ -1,18 +1,7 @@
-import itertools
+print('00123'.lstrip('0'))
+print('00000'.lstrip('0'))
 
-def generate_masks(n):
-  """Generates all possible masks of length n.
+string = '0000'
 
-  Args:
-    n: The desired length of the masks.
-
-  Returns:
-    A list of all possible masks.
-  """
-
-  return list(itertools.product([True, False], repeat=n))
-
-# Example usage:
-n = 3
-all_masks = generate_masks(n)
-print(all_masks)
+string = string.lstrip('0') if string.count('0') != len(string) else '0'
+print(string)
