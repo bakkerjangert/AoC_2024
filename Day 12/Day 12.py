@@ -19,7 +19,6 @@ answer_pt1, answer_pt2 = 0, 0
 for y, line in enumerate(grid):
     while np.count_nonzero(line == '#') != len(line):
         # show_grid(grid)
-        boundary = 0
         boundaries = []
         x = np.argmax(line != '#')
         char = grid[y, x]
@@ -32,16 +31,14 @@ for y, line in enumerate(grid):
                 next_x, next_y = cur_x + dx, cur_y + dy
                 side = sides[(dx, dy)]
                 if not 0 <= next_x < x_max or not 0 <= next_y < y_max:  # out of grid
-                    boundary += 1
                     boundaries.append((cur_x, cur_y, side))
                 elif grid[next_y, next_x] != char and (next_x, next_y) not in current_area:
-                    boundary += 1
                     boundaries.append((cur_x, cur_y, side))
                 elif grid[next_y, next_x] == char and (next_x, next_y) not in current_area:
                     positions.append((next_x, next_y))
                     current_area.append((next_x, next_y))
-        answer_pt1 += len(current_area) * boundary
-        to_delete = []
+        answer_pt1 += len(current_area) * len(boundaries)
+        double_edges = []
         for d in ('^', '<', '>', 'v'):
             bounds = [n for n in boundaries if n[2] == d]
             if d in '<>':
@@ -52,10 +49,8 @@ for y, line in enumerate(grid):
                 a, b = (1, 0)
             for b1, b2 in zip(sorted_boundaries[:-1], sorted_boundaries[1:]):
                 if b1[0] + a == b2[0] and b1[1] + b == b2[1]:
-                    to_delete.append(boundaries.index(b2))
-        for i in sorted(to_delete, reverse=True):
-            del boundaries[i]
-        answer_pt2 += len(boundaries) * len(current_area)
+                    double_edges.append(boundaries.index(b2))
+        answer_pt2 += (len(boundaries) - len(double_edges)) * len(current_area)
         # print(f'added {len(current_area)} x {len(boundaries)} with mar {char}')
         # print(f'Adding {len(current_area)} x {boundary}')
 print(f'Part 1: {answer_pt1}')
