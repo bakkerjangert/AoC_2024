@@ -9,7 +9,7 @@ def show_grid(grd):
 
 file = 'input.txt'
 # file = 'example_01.txt'
-# file = 'example_02.txt'
+# file = 'example_02.txt.txt'
 
 grid = np.array([list(line.strip()) for line in open(file)])
 x_max, y_max = len(grid[0]), len(grid)
