@@ -129,8 +129,8 @@ for i in instructions:
         if sub_grid[0] == '.':
             x += dx
             y += dy
-# doubled_grid[y, x] = '@'
-# show_grid(doubled_grid)
+doubled_grid[y, x] = '@'
+show_grid(doubled_grid)
 answer_pt2 = 0
 ys, xs = np.where(doubled_grid == '[')
 for x, y in zip(xs, ys):
