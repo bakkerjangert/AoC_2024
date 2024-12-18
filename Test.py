@@ -1,4 +1,6 @@
-import mpmath as mp
 
-mp.dps = 256
-print(mp.mpmathify(1))
+scores = {'a': 0, 'b': 0, 'c': 0}
+
+n = min(scores, key=scores.get)
+
+print(n)
