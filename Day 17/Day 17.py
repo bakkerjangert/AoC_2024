@@ -1,4 +1,3 @@
-
 class Program:
     def __init__(self, data):
         self.registers = {'A': 0, 'B': 0, 'C': 0}
@@ -85,49 +84,21 @@ p = Program(data)
 p.run()
 print(f'Part 1: {p.output[:-1]}')
 
-print(f' Input: {p.prog_string}')
-
-revers_program = list(map(int, p.prog_string.split(',')))[::-1]
-#
-dAs = list(map(int, '01234567'))
-base_A = 0
+As = [0]
 found = False
-i, j = 0, 0
-while i < len(revers_program):
-    print(f'i = {i}')
-    n = revers_program[i]
-    found_next_A = False
-    for dA in dAs[j:]:
-        cur_A = base_A + dA
-        if cur_A == 0:
-            continue
-        print(f'A + da = {cur_A}')
+while len(As) != 0:
+    A = As.pop(0)
+    for dA in range(8):
         p.reset()
-        p.registers['A'] = base_A + dA
+        p.registers['A'] = A + dA
         p.update_combos()
-        # print(f'A = {p.registers['A']}')
         p.run()
-        print(f'Output: {p.output}')
-        if int(p.output.split(',')[-2]) == n:
-            base_A = cur_A * 8
-            found_next_A = True
-            break
-        if p.output[:-1] == p.prog_string:
-            print(f'Part 2: {cur_A}')
+        string = p.output[:-1]
+        if p.prog_string == string:
+            print(f'Part 2: {A + dA}')
             found = True
-        # if 0 in new_dAs:
-        #     new_dAs.remove(0)
+            break
+        if p.prog_string.endswith(string) and A + dA != 0:
+            As.append((A + dA) * 8)
     if found:
         break
-    if not found_next_A:
-        j = len(dAs)
-        base = len(dAs) // 8
-        for f in range(1, 8):
-            for val in dAs[:]:
-                dAs.append(base * f + val)
-        print(dAs)
-        input('...')
-    else:
-        i += 1
-        j = 0
-        input('...')
