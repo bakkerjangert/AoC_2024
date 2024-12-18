@@ -25,7 +25,6 @@ def dijkstra(grid, S, E):
         for dx, dy in ((0,1), (0, -1), (1,0), (-1, 0)):
             if grid[y + dy, x + dx] == '.':
                 links[(x, y)].add((x + dx, y + dy))
-                links[(x + dx, y + dy)].add((x, y))
     scores = {n: float('inf') for n in nodes}
     scores[S] = 0
     current_nodes = [S]
@@ -41,7 +40,6 @@ def dijkstra(grid, S, E):
                 current_nodes.append(next_n)
         finished_nodes.append(n)
     return None
-
 
 file = 'input.txt'
 r, c = 71, 71
