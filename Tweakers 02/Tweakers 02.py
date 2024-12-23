@@ -38,7 +38,7 @@ def decode(n1, n2, data):
     print(f'Part 1: {s1}{s2[::-1]}')
 
 file = 'input.txt'
-# file = 'example_01.txt'
+# file = 'example_01.txt.txt'
 # file = 'example_02.txt.txt'
 
 with open(file, encoding="utf8") as f:

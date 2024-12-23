@@ -8,7 +8,7 @@ def show_grid(grd):
         print('')
 
 file = 'input.txt'
-# file = 'example_01.txt'
+# file = 'example_01.txt.txt'
 # file = 'example_02.txt.txt'
 
 grid = np.array([list(line.strip()) for line in open(file)])

@@ -43,7 +43,7 @@ def walk(grid, guard, pos, d, pt1=False):
         guard = d[0]
 
 file = 'input.txt'
-# file = 'example_01.txt'
+# file = 'example_01.txt.txt'
 file = 'aoc-2024-day-06-challenge-3.txt'
 
 with open(file, encoding="utf8") as f:

@@ -1,6 +1,6 @@
 
-scores = {'a': 0, 'b': 0, 'c': 0}
+n = [1, -1, 3, 0, 2, -8]
 
-n = min(scores, key=scores.get)
+search = [-1, 3]
 
-print(n)
+print(''.join(n).index(''))

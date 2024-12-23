@@ -12,7 +12,7 @@ def can_build_string(target_string, substrings):
     return dp[-1]
 
 file = 'input.txt'
-# file = 'example_01.txt'
+# file = 'example_01.txt.txt'
 
 with open(file, encoding="utf8") as f:
     data = f.read().splitlines()

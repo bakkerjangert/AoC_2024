@@ -44,7 +44,7 @@ def dijkstra(grid, S, E):
 file = 'input.txt'
 r, c = 71, 71
 b = 1024
-# file = 'example_01.txt'
+# file = 'example_01.txt.txt'
 # r, c = 7, 7
 # b = 12
 

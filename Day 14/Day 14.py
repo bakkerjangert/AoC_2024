@@ -44,7 +44,7 @@ class Robot:
 
 file = 'input.txt'
 cols, rows = 101, 103
-# file = 'example_01.txt'
+# file = 'example_01.txt.txt'
 # cols, rows = 11, 7
 
 with open(file, encoding="utf8") as f:
