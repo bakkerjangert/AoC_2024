@@ -26,7 +26,7 @@ def get_path_n2(n):
         path += p + 'A'
     return path
 
-def get_path_d(n, return_min=True):
+def get_path_d(n):
     paths = set(('',))
     for step in zip(n[:-1], n[1:]):
         new_paths = set()
@@ -42,6 +42,14 @@ def get_path_d2(n):
         p = d_paths[step][0]
         path += p + 'A'
     return path
+
+def path2_rec(ns, paths, depth=1):
+    for i, path in enumerate(paths):
+        ns[i] += sum([len(d_paths[p]) for p in path])
+    if depth == 25:
+        return min(ns)
+
+
 
 
 file = 'input.txt'
@@ -130,6 +138,19 @@ for code in codes:
     # print(Counter([len(s[0]) for s in s_paths]))
 print(f'Part 1: {answer_pt1}')
 
+paths = set()
+paths.add('A^')
+for r in range(25):
+    print(r)
+    new_paths = set()
+    for p in paths:
+        new_paths.update(get_path_d(p))
+    min_length = min([len(p) for p in new_paths])
+    paths = set([p for p in new_paths if len(p) == min_length])
+print(paths)
+
+exit()
+
 counts = dict()
 for k in d_paths.keys():
     if len(d_paths[k][0]) < 2:
@@ -164,3 +185,5 @@ for code in codes:
     val = int(code.replace('A', ''))
     answer_pt2 += val * len(paths.pop())
 print(f'Part 2: {answer_pt2}')
+
+# Example input result 154115708116294
